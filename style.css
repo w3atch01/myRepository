@@ -1,0 +1,100 @@
+@font-face {
+    font-family: bonyadname;
+    src: url("./bonyad.ttf");
+}
+
+
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'bonyadname', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .css-div-main {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .js-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    outline: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .css-button-div {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .css-button-div button {
+    background-color: #d0e8f7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .css-button-div button:hover {
+    background-color: #0d8ddb;
+  }
+  
+  .css-png {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .js-list {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  ol {
+    list-style-position: inside;
+    text-align: left;
+    padding-left: 0;
+  }
+  
+  .js-div li {
+    background-color: #f5f8fa;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #555;
+  }
+  

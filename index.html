@@ -7,76 +7,92 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>To do List!</h1>
-    <input type="text" class="js-input" onkeydown="keyDown()">
-    <br>
-    <button class="js-add" onclick="addToList()" >Add</button>
-    <button class="js-first" onclick="remove('first')">Remove first task</button>
-    <button class="js-last" onclick="remove('last')">Remove last task</button>
-    <button class="js-all" onclick="remove('all')">Remove All tasks!</button>
+    <div class="css-div-main">
+        <h1>برنامه روزانه</h1>
+        <input type="text" class="js-input" onkeydown="keyDown()">
+        <br>
+        <div class="css-button-div">
+        <button class="js-add" onclick="addToList()" ><img src="pngs/Add.png" class="css-png"></button>
+        <button class="js-first" onclick="remove('first')"><img src="/pngs/-S.png" class="css-png"></button>
+        <button class="js-last" onclick="remove('last')"><img src="/pngs/-L.png" class="css-png"></button>
+        <button class="js-all" onclick="remove('all')"><img src="pngs/Remove.png" class="css-png"></button>
+        </div>
+        
 
-    <p class="js-list"></p>
 
+        <p class="js-list"></p>
+
+        <ol>
+        <div class="js-div"></div>
+        </ol>
+    </div>
     <script>
-        let list = [];
+
+        
+        let list = []
+
 
         if (localStorage.getItem('listSave')) {
-            list = JSON.parse(localStorage.getItem('listSave'));
+            list = JSON.parse(localStorage.getItem('listSave'))
         } else if (!localStorage.getItem('listSave')) {
-            list = [];
+            list = []
         }
 
-        console.log(localStorage.getItem('listSave'));
+        updateDiv()
+        
 
-        // Function to add a task to the list
-        function addToList() {
-            const task = document.querySelector(".js-input").value;  // Get the task input value
-
-            if (!task) {  // Check if the input is empty
-                document.querySelector('.js-list').innerHTML = "Please enter a task!";
-            } else {
-                list.push(task);  // Add the task to the list
-                console.log(list);
-
-                // Clear the input field after adding the task
-                document.querySelector(".js-input").value = "";
-
-                // Update localStorage with the new task list
-                localStorage.setItem('listSave', JSON.stringify(list));
-
-                // --- Send the task to Google Sheets ---
-                fetch('https://script.google.com/macros/s/AKfycbyO0QayKjys51-G8x3jJp_LZNr_WEov_pJ7A9QWqQ4gwJQVAV_SckwRMpoq_uEhMNHN/exec', {
-                    method: 'POST',  // Send a POST request
-                    body: JSON.stringify({ task: task }),  // Send the task as a JSON object
-                    headers: {
-                        'Content-Type': 'application/json'  // Tell the server it's JSON data
-                    }
-                })
-                .then(response => response.text())  // Convert the response to text
-                .then(data => console.log('Task sent to Google Sheets:', data))  // Log the response data (optional)
-                .catch((error) => console.error('Error sending task to Google Sheets:', error));  // Handle any errors
+        function addToList () {
+            if (!document.querySelector(".js-input").value) {
+                document.querySelector('.js-list').innerHTML = "pls enter a task!"
             }
+            else if (document.querySelector(".js-input").value)  {
+            list.push(document.querySelector(".js-input").value)
+            document.querySelector(".js-input").value = ""
+            localStorage.setItem('listSave', JSON.stringify(list))
+            document.querySelector(".js-list").innerHTML = ""
+            }
+            updateDiv()
+            
         }
+
+
 
         function keyDown() {
-            if (event.key == "Enter") {
-                addToList();
+            if  (event.key == "Enter") {
+                addToList()
             }
         }
 
-        function remove(task) {
-            if (task == "first") {
-                list.shift();
+
+
+        function remove (task) {
+            if (task == "first" ) {
+                list.shift()
             } else if (task == 'last') {
-                list.pop();
+                list.pop()
             } else if (task == "all") {
-                list = [];
-                alert("All tasks removed successfully!");
-            }
+                list = []
+                console.log("all tasks removed sucsesfully!")
+            } 
 
-            localStorage.setItem('listSave', JSON.stringify(list));
-            console.log(list);
+            localStorage.setItem('listSave', JSON.stringify(list))
+            updateDiv()
+        } 
+        
+
+
+        function updateDiv() {
+
+            let i = 0
+            let newList = ""
+            while (list.length > i) {
+                newList = newList + `<li> ${list[i]} </li>` 
+                i = i + 1
+            }
+            document.querySelector('.js-div').innerHTML = newList
         }
+        
+
     </script>
 </body>
 </html>
