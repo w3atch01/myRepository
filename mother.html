@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .green {
+            background-color: green;
+        }
+
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1 class="js-head">Toss a Coin!</h1>
+    <button class="js-toss" onclick="toss()">Toss!</button>
+    <button class="js-again" onclick="resets()">try agian</button>
+
+    <script>
+        
+        function toss () {
+            let ranNum = Math.round(Math.random())
+            if (ranNum === 0) {
+                document.querySelector('.js-toss').innerHTML = "Heads!"
+                document.querySelector('.js-toss').classList.add('green')
+                document.querySelector('.js-head').innerHTML = "You Won! Congratulations :)"
+            } else if (ranNum === 1) {
+                document.querySelector('.js-toss').innerHTML = "Tails!"
+                document.querySelector('.js-toss').classList.add('red')
+                document.querySelector('.js-head').innerHTML = "You Lost! condolences :("
+            }
+        }
+
+        function resets () {
+            document.querySelector('.js-toss').innerHTML = "Toss agian"
+            document.querySelector('.js-toss').classList.remove('red')
+            document.querySelector('.js-toss').classList.remove('green')
+            document.querySelector('.js-head').innerHTML = "Toss a Coin!"
+        }
+        
+    </script>
+</body>
+</html>
