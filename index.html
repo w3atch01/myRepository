@@ -1,40 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Send to Bale Channel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Send a message to our Bale Channel</h1>
-  <form id="messageForm">
-    <input type="text" id="messageInput" placeholder="Type your message" required>
-    <button type="submit">Send</button>
-  </form>
+    <h1>To do List!</h1>
+    <input type="text" class="js-input" onkeydown="keyDown()">
+    <br>
+    <button class="js-add" onclick="addToList()" >Add</button>
+    <button class="js-first" onclick="remove('first')">Remove first task</button>
+    <button class="js-last" onclick="remove('last')">Remove last task</button>
+    <button class="js-all" onclick="remove('all')">Remove All tasks!</button>
 
-  <script>
-    document.getElementById('messageForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const message = document.getElementById('messageInput').value;
-      
-      fetch('http://services.irn10.chabokan.net:35437/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ text: message })
-      })
-      .then(response => {
-        if (response.ok) {
-          alert('Message sent!');
-        } else {
-          alert('Failed to send message.');
+    <p class="js-list"></p>
+
+    <script>
+        let list = [];
+
+        if (localStorage.getItem('listSave')) {
+            list = JSON.parse(localStorage.getItem('listSave'));
+        } else if (!localStorage.getItem('listSave')) {
+            list = [];
         }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Error sending message.');
-      });
-    });
-  </script>
+
+        console.log(localStorage.getItem('listSave'));
+
+        // Function to add a task to the list
+        function addToList() {
+            const task = document.querySelector(".js-input").value;  // Get the task input value
+
+            if (!task) {  // Check if the input is empty
+                document.querySelector('.js-list').innerHTML = "Please enter a task!";
+            } else {
+                list.push(task);  // Add the task to the list
+                console.log(list);
+
+                // Clear the input field after adding the task
+                document.querySelector(".js-input").value = "";
+
+                // Update localStorage with the new task list
+                localStorage.setItem('listSave', JSON.stringify(list));
+
+                // --- Send the task to Google Sheets ---
+                fetch('https://script.google.com/macros/s/AKfycby4JPzmtYLj-gJkph-y9C1WalRROXdxyYguD27Xyta3UczmG2Ul0ZflvbY5WSSVbswo/exec', {
+                    method: 'POST',  // Send a POST request
+                    body: JSON.stringify({ task: task }),  // Send the task as a JSON object
+                    headers: {
+                        'Content-Type': 'application/json'  // Tell the server it's JSON data
+                    }
+                })
+                .then(response => response.text())  // Convert the response to text
+                .then(data => console.log('Task sent to Google Sheets:', data))  // Log the response data (optional)
+                .catch((error) => console.error('Error sending task to Google Sheets:', error));  // Handle any errors
+            }
+        }
+
+        function keyDown() {
+            if (event.key == "Enter") {
+                addToList();
+            }
+        }
+
+        function remove(task) {
+            if (task == "first") {
+                list.shift();
+            } else if (task == 'last') {
+                list.pop();
+            } else if (task == "all") {
+                list = [];
+                alert("All tasks removed successfully!");
+            }
+
+            localStorage.setItem('listSave', JSON.stringify(list));
+            console.log(list);
+        }
+    </script>
 </body>
 </html>
