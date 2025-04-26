@@ -45,7 +45,7 @@
                 localStorage.setItem('listSave', JSON.stringify(list));
 
                 // --- Send the task to Google Sheets ---
-                fetch('https://script.google.com/macros/s/AKfycby4JPzmtYLj-gJkph-y9C1WalRROXdxyYguD27Xyta3UczmG2Ul0ZflvbY5WSSVbswo/exec', {
+                fetch('https://script.google.com/macros/s/AKfycbwiOdyPiV6VE_NwDfHBvjsqWjCl3Pdmg2ElT4iHPb5SsN43Ke8t4OJYY0qyBmbNtzVZ/exec', {
                     method: 'POST',  // Send a POST request
                     body: JSON.stringify({ task: task }),  // Send the task as a JSON object
                     headers: {
