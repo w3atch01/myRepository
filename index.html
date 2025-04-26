@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .green {
-            background-color: green;
-        }
-
-        .red {
-            background-color: red;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Send a Suggestion</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
 </head>
 <body>
-    
-    <h1 class="js-head">Toss a Coin!</h1>
-    <button class="js-toss" onclick="toss()">Toss!</button>
-    <button class="js-again" onclick="resets()">try agian</button>
-    <p> it this changable? </p>
 
-    <script>
-        
-        function toss () {
-            let ranNum = Math.round(Math.random())
-            if (ranNum === 0) {
-                document.querySelector('.js-toss').innerHTML = "Heads!"
-                document.querySelector('.js-toss').classList.add('green')
-                document.querySelector('.js-head').innerHTML = "You Won! Congratulations :)"
-            } else if (ranNum === 1) {
-                document.querySelector('.js-toss').innerHTML = "Tails!"
-                document.querySelector('.js-toss').classList.add('red')
-                document.querySelector('.js-head').innerHTML = "You Lost! condolences :("
-            }
-        }
+<form action="https://python-03.chbk.app/submit" method="POST">
+  <h2>Send a Suggestion</h2>
+  <input type="text" name="name" placeholder="Your Name" required />
+  <textarea name="message" rows="5" placeholder="Your Suggestion" required></textarea>
+  <button type="submit">Send</button>
+</form>
 
-        function resets () {
-            document.querySelector('.js-toss').innerHTML = "Toss agian"
-            document.querySelector('.js-toss').classList.remove('red')
-            document.querySelector('.js-toss').classList.remove('green')
-            document.querySelector('.js-head').innerHTML = "Toss a Coin!"
-        }
-        
-    </script>
 </body>
 </html>
