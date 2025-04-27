@@ -4,7 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        @font-face {
+    font-family: 'BNY';
+    src: url('bonyad.ttf');
+  }
+  
+  /* Reset styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body Styling */
+  body {
+    font-family: 'BNY', sans-serif;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+  
+  /* Title */
+  h1 {
+    margin-bottom: 30px;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeInDown 1s ease-out;
+  }
+  
+  /* Input and Button */
+  input.js-input {
+    padding: 15px;
+    width: 300px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    background-color: #ffffffcc;
+    color: #333;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  input.js-input:focus {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px #ffffffaa;
+  }
+  
+  button.js-add {
+    padding: 15px 25px;
+    margin-left: 15px;
+    border-radius: 8px;
+    border: none;
+    background: #ffffff;
+    color: #6a11cb;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  
+  button.js-add:hover {
+    background: #6a11cb;
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  /* Error Message */
+  p.js-p {
+    margin-top: 15px;
+    color: #ff7b7b;
+    font-size: 1rem;
+    min-height: 20px;
+    animation: fadeIn 0.8s ease-in;
+  }
+  
+  /* Tasks Container */
+  div.js-div {
+    margin-top: 40px;
+    width: 90%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Each Task Line */
+  .js-task-lines-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 12px;
+    padding: 12px 18px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .js-task-lines-div:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+  }
+  
+  /* Task Text */
+  .js-task-lines-div li {
+    list-style: none;
+    font-size: 1.2rem;
+    color: #ffffff;
+    word-break: break-word;
+  }
+  
+  /* Delete Button */
+  .js-task-lines-div button {
+    padding: 7px 12px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ff4d4d;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .js-task-lines-div button:hover {
+    background-color: #d90429;
+    transform: scale(1.1);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+    </style>
 </head>
 <body>
     <h1>برنامه‌های روزانه</h1>
@@ -13,6 +160,51 @@
     <p class="js-p"></p>
     <div class="js-div"></div>
 
-    <script src="script.js"></script>
+    <script>
+        let toDoList = []
+let inputVar = document.querySelector(".js-input")
+let pVar = document.querySelector(".js-p")
+
+if (localStorage.getItem('saved')) {
+    toDoList = JSON.parse(localStorage.getItem('saved'))
+    updateList()
+}
+
+function addToList() {
+    if (!inputVar.value) {
+        pVar.innerHTML = "Please Enter a Task."
+    } else if (inputVar.value) {
+        toDoList.push(inputVar.value)
+        inputVar.value = ""
+        pVar.innerHTML = ""
+        localStorage.setItem('saved', JSON.stringify(toDoList))
+        updateList()
+    }
+}
+
+function updateList () {
+    let i = 0
+    let htmlList = ""
+
+    while (i < toDoList.length) {
+        htmlList = htmlList + `<div class="js-task-lines-div"><li>${toDoList[i]}</li> <button onclick="toDoList.splice(${i},1);updateList();saveToLocal()">
+        Delete Task</button></div>`
+        i = i + 1
+    }
+    document.querySelector(".js-div").innerHTML = htmlList
+}
+
+function keyDown() {
+    if (event.key == "Enter") {
+        addToList()
+    }
+}
+
+function saveToLocal () {
+    localStorage.setItem('saved', JSON.stringify(toDoList))
+}
+
+
+    </script>
 </body>
 </html>
