@@ -156,7 +156,7 @@
 <body>
     <h1>برنامه‌های روزانه</h1>
     <input class="js-input" onkeydown="keyDown()" >
-    <button class="js-add" onclick="addToList()">Add</button>
+    <button class="js-add" onclick="addToList()">اضافه کردن</button>
     <p class="js-p"></p>
     <div class="js-div"></div>
 
@@ -172,7 +172,7 @@ if (localStorage.getItem('saved')) {
 
 function addToList() {
     if (!inputVar.value) {
-        pVar.innerHTML = "Please Enter a Task."
+        pVar.innerHTML = "یک برنامه را وارد کنید"
     } else if (inputVar.value) {
         toDoList.push(inputVar.value)
         inputVar.value = ""
@@ -188,7 +188,7 @@ function updateList () {
 
     while (i < toDoList.length) {
         htmlList = htmlList + `<div class="js-task-lines-div"><li>${toDoList[i]}</li> <button onclick="toDoList.splice(${i},1);updateList();saveToLocal()">
-        Delete Task</button></div>`
+        پاک کردن</button></div>`
         i = i + 1
     }
     document.querySelector(".js-div").innerHTML = htmlList
