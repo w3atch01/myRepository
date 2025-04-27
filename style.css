@@ -1,100 +1,146 @@
 @font-face {
-    font-family: bonyadname;
-    src: url("./bonyad.ttf");
-}
-
-
-/* Reset default browser styles */
-* {
+    font-family: 'BNY';
+    src: url('bonyad.ttf');
+  }
+  
+  /* Reset styles */
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
   
+  /* Body Styling */
   body {
-    font-family: 'bonyadname', sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'BNY', sans-serif;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    color: #ffffff;
+    overflow-x: hidden;
   }
   
-  .css-div-main {
-    background-color: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* Title */
+  h1 {
+    margin-bottom: 30px;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeInDown 1s ease-out;
+  }
+  
+  /* Input and Button */
+  input.js-input {
+    padding: 15px;
+    width: 300px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    background-color: #ffffffcc;
+    color: #333;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  input.js-input:focus {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px #ffffffaa;
+  }
+  
+  button.js-add {
+    padding: 15px 25px;
+    margin-left: 15px;
+    border-radius: 8px;
+    border: none;
+    background: #ffffff;
+    color: #6a11cb;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  
+  button.js-add:hover {
+    background: #6a11cb;
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  /* Error Message */
+  p.js-p {
+    margin-top: 15px;
+    color: #ff7b7b;
+    font-size: 1rem;
+    min-height: 20px;
+    animation: fadeIn 0.8s ease-in;
+  }
+  
+  /* Tasks Container */
+  div.js-div {
+    margin-top: 40px;
     width: 90%;
     max-width: 500px;
-    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   }
   
-  h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #333;
-  }
-  
-  .js-input {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    outline: none;
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-  
-  .css-button-div {
+  /* Each Task Line */
+  .js-task-lines-div {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .css-button-div button {
-    background-color: #d0e8f7;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 15px;
-    border-radius: 30px;
-    cursor: pointer;
-    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 5px;
-    transition: background-color 0.3s;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 12px;
+    padding: 12px 18px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
   }
   
-  .css-button-div button:hover {
-    background-color: #0d8ddb;
+  .js-task-lines-div:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
   }
   
-  .css-png {
-    width: 20px;
-    height: 20px;
+  /* Task Text */
+  .js-task-lines-div li {
+    list-style: none;
+    font-size: 1.2rem;
+    color: #ffffff;
+    word-break: break-word;
   }
   
-  .js-list {
-    color: red;
-    margin-bottom: 10px;
-    font-size: 14px;
+  /* Delete Button */
+  .js-task-lines-div button {
+    padding: 7px 12px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ff4d4d;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
   
-  ol {
-    list-style-position: inside;
-    text-align: left;
-    padding-left: 0;
+  .js-task-lines-div button:hover {
+    background-color: #d90429;
+    transform: scale(1.1);
   }
   
-  .js-div li {
-    background-color: #f5f8fa;
-    padding: 10px 15px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    font-size: 16px;
-    color: #555;
+  /* Animations */
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
   
