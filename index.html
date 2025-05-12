@@ -4,151 +4,86 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ورود به ربات معلم یار</title>
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Lottie Player -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg-light: #f9f9f9;
-      --bg-dark: #1c1c1c;
-      --text-light: #333;
-      --text-dark: #f5f5f5;
-      --section-light: #ffffff;
-      --section-dark: #2a2a2a;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      padding: 0;
       font-family: 'Vazirmatn', sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
+      background-color: #f5f7fa;
+      color: #333;
       display: flex;
-      height: 100vh;
-      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
     }
-
-    body.dark-mode {
-      background: var(--bg-dark);
-      color: var(--text-dark);
+    .container {
+      margin: auto;
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      overflow: hidden;
     }
-
-    .left-section {
+    .visual {
       flex: 1;
+      background-color: #eef3fd;
       display: flex;
-      justify-content: center;
       align-items: center;
-      background-color: #e8f0fe;
+      justify-content: center;
     }
-
-    body.dark-mode .left-section {
-      background-color: #1a1f29;
-    }
-
     #lottie-animation {
       width: 100%;
-      max-width: 500px;
-      height: 500px;
-    }
-
-    .right-section {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: var(--section-light);
-      transition: background 0.3s;
-    }
-
-    body.dark-mode .right-section {
-      background-color: var(--section-dark);
-    }
-
-    .content-box {
-      text-align: center;
       max-width: 400px;
-      padding: 1rem;
+      height: auto;
     }
-
-    h1 {
-      font-size: 2rem;
+    .form-area {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .form-area h1 {
+      font-size: 2.2rem;
       margin-bottom: 1.5rem;
+      color: #1a237e;
     }
-
-    .btn {
-      background-color: #0072ff;
-      color: white;
+    .btn-primary {
+      background-color: #1a237e;
+      color: #fff;
       border: none;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-size: 1.2rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.1rem;
       font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
+      text-decoration: none;
+      display: inline-block;
     }
-
-    .btn:hover {
-      background-color: #0056cc;
+    .btn-primary:hover {
+      background-color: #151a57;
     }
-
-    .toggle-theme {
-      margin-top: 2rem;
-      background-color: transparent;
-      color: inherit;
-      border: 2px solid currentColor;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-        height: auto;
-      }
-
-      .left-section, .right-section {
-        flex: none;
-        width: 100%;
-        height: auto;
-        padding: 2rem 1rem;
-      }
-
-      #lottie-animation {
-        max-width: 100%;
-        height: auto;
-      }
-
-      .content-box {
-        max-width: 100%;
-        padding: 1rem;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      .btn {
-        font-size: 1rem;
-        padding: 0.75rem 1.5rem;
-      }
+      .container { flex-direction: column; }
+      .visual, .form-area { width: 100%; padding: 1.5rem; }
+      .form-area h1 { font-size: 1.8rem; }
+      .btn-primary { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <div class="left-section">
-    <div id="lottie-animation"></div>
-  </div>
-  <div class="right-section">
-    <div class="content-box">
+  <div class="container">
+    <div class="visual">
+      <div id="lottie-animation"></div>
+    </div>
+    <div class="form-area">
       <h1>به ربات معلم یار خوش آمدید</h1>
-      <button class="btn" onclick="window.location.href='https://ble.ir/moalemyar_feedback_bot'">ورود به ربات</button>
-      <br>
-      <button class="toggle-theme" onclick="toggleTheme()">🌓 تغییر حالت</button>
+      <a href="https://ble.ir/moalemyar_feedback_bot" class="btn-primary">ورود به ربات</a>
     </div>
   </div>
 
@@ -158,12 +93,9 @@
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: 'https://assets3.lottiefiles.com/packages/lf20_myejiggj.json'
+      // Teacher-themed animation from LottieFiles
+      path: 'https://assets9.lottiefiles.com/packages/lf20_2LdL7Q.json'
     });
-
-    function toggleTheme() {
-      document.body.classList.toggle('dark-mode');
-    }
   </script>
 </body>
 </html>
